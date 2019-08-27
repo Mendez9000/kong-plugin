@@ -3,7 +3,7 @@ local BasePlugin = require "kong.plugins.base_plugin"
 
 local AuthHandler = BasePlugin:extend()
 
-AuthHandler.PRIORITY = 1500
+AuthHandler.PRIORITY = 2000
 
 function AuthHandler:new()
   AuthHandler.super.new(self, "auth plugin")
@@ -14,10 +14,10 @@ function AuthHandler:access(conf)
 
   if conf.enabled then
     ngx.log(ngx.ERR, "auth in action")
-    ngx.header["auth"] = true
+    ngx.header["auth"] = "true"
   else
     ngx.log(ngx.ERR, "auth is disabled")
-    ngx.header["auth"] = false
+    ngx.header["auth"] = "false"
   end
 
 end
